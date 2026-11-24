@@ -1,0 +1,1852 @@
+
+:root {
+  --color-principal: #4B3AA8;   /* violeta: acciones y foco */
+  --color-secundario: #1FA091;  /* verde agua: detalles y acentos */
+  --color-fondo: #EFECF7;       /* lavanda muy claro: fondo de página */
+  --color-texto: #241F35;       /* tinta: todo el texto */
+  --fuente-principal: 'Karla', 'Segoe UI', system-ui, sans-serif;
+
+  /* Auxiliares derivadas de la paleta */
+  --fuente-titulos: 'Fraunces', Georgia, serif;
+  --color-superficie: #FFFFFF;
+  --color-borde: #CFC8E6;
+  --radio: 8px;
+  --espacio: 1.25rem;
+}
+
+/* ---------- 2. Reset mínimo ---------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: var(--fuente-principal);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ---------- 3. Estructura de la página ---------- */
+.pagina {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+@media (min-width: 900px) {
+  .pagina {
+    grid-template-columns: 320px 1fr;
+    gap: 3rem;
+    padding: 4rem 2rem;
+    align-items: start;
+  }
+}
+
+/* ---------- 4. Panel de presentación ---------- */
+.panel {
+  padding: 2.5rem 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .panel {
+    position: sticky;
+    top: 4rem;
+    padding: 0;
+  }
+}
+
+.marca {
+  margin: 0 0 1.5rem;
+  font-family: var(--fuente-titulos);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--color-principal);
+}
+
+.panel__titulo {
+  margin: 0 0 1rem;
+  font-family: var(--fuente-titulos);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.panel__texto {
+  margin: 0 0 2rem;
+  max-width: 34ch;
+  color: #ff02c8;
+}
+
+.tips {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-borde);
+}
+
+.tips li {
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--color-borde);
+  font-size: 0.9rem;
+  color: rgba(36, 31, 53, 0.75);
+}
+
+/* ---------- 5. Formulario ---------- */
+.contenido {
+  padding: 0 1.5rem 3rem;
+}
+
+@media (min-width: 900px) {
+  .contenido {
+    padding: 0;
+  }
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.bloque {
+  margin: 0;
+  padding: 1.75rem;
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+}
+
+.bloque__titulo {
+  padding: 0 0.6rem;
+  margin-left: -0.6rem;
+  font-family: var(--fuente-titulos);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-principal);
+}
+
+/* Cada dato con su etiqueta */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: var(--espacio);
+}
+
+.campo:last-child {
+  margin-bottom: 0;
+}
+
+.campo label,
+.campo__etiqueta {
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+/* Dos campos lado a lado en pantallas anchas */
+.fila {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--espacio);
+}
+
+@media (min-width: 560px) {
+  .fila {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ---------- 6. Controles ---------- */
+input[type="text"],
+input[type="url"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--color-texto);
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+::placeholder {
+  color: rgba(36, 31, 53, 0.4);
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--color-principal);
+  outline-offset: 2px;
+  border-color: var(--color-principal);
+}
+
+/* Marca en rojo suave solo después de que el usuario escribió algo inválido */
+input:not(:placeholder-shown):invalid,
+textarea:not(:placeholder-shown):invalid {
+  border-color: #C0392B;
+}
+
+.ayuda {
+  font-size: 0.8rem;
+  color: rgba(36, 31, 53, 0.6);
+}
+
+/* ---------- 7. Checkboxes y radios ---------- */
+.opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.2rem;
+}
+
+.opciones--fila {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.opcion {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.95rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.opcion--suelta {
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-borde);
+}
+
+.opcion input {
+  width: 1.05rem;
+  height: 1.05rem;
+  accent-color: var(--color-secundario);
+  cursor: pointer;
+}
+
+/* ---------- 8. Botones ---------- */
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.boton {
+  padding: 0.8rem 1.5rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radio);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.boton--principal {
+  background-color: var(--color-principal);
+  color: #FFFFFF;
+}
+
+.boton--principal:hover {
+  background-color: #3B2E86;
+}
+
+.boton--secundario {
+  background-color: transparent;
+  color: var(--color-principal);
+  border-color: var(--color-borde);
+}
+
+.boton--secundario:hover {
+  border-color: var(--color-principal);
+}
+
+/* ---------- 9. Accesibilidad ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
+/* ---------- 10. Sección de Catálogo y Carteleras ---------- */
+.catalog-section {
+  max-width: 1080px;
+  margin: 3rem auto;
+  padding: 0 1.5rem;
+}
+
+.catalog-section h2 {
+  font-family: var(--fuente-titulos);
+  font-size: 2rem;
+  color: var(--color-principal);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Grilla adaptable de tarjetas */
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+/* Estilo individual de cada tarjeta (article) */
+.card-serie {
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 6px rgba(36, 31, 53, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-serie:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 12px rgba(75, 58, 168, 0.12);
+}
+
+/* Imagen de portada de la tarjeta */
+.card-serie img {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  background-color: var(--color-borde);
+}
+
+/* Cuerpo de la tarjeta */
+.card-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex-grow: 1;
+}
+
+.card-header-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Badge o etiqueta de género */
+.badge-genero {
+  background-color: var(--color-fondo);
+  color: var(--color-principal);
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+/* Puntuación de estrellas */
+.score {
+  font-weight: 700;
+  color: #f39c12; /* Color dorado para la estrella */
+  font-size: 0.95rem;
+}
+
+/* Título de la obra en la tarjeta */
+.card-title {
+  font-family: var(--fuente-titulos);
+  font-size: 1.25rem;
+  margin: 0;
+  color: var(--color-texto);
+  line-height: 1.3;
+}
+
+/* Reseña de la tarjeta */
+.card-resena {
+  font-size: 0.9rem;
+  color: rgba(36, 31, 53, 0.8);
+  margin: 0;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+/* Autor o email en el pie de la tarjeta */
+.card-footer-author {
+  font-size: 0.8rem;
+  color: rgba(36, 31, 53, 0.6);
+  border-top: 1px solid var(--color-borde);
+  padding-top: 0.75rem;
+  margin-top: auto;
+}
+
+/* Textos de carga o error */
+.subtitle {
+  text-align: center;
+  font-size: 1.1rem;
+  color: rgba(36, 31, 53, 0.7);
+  grid-column: 1 / -1;
+  padding: 2rem 0;
+}
+.card-header-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.badge-tipo {
+  background-color: var(--color-principal);
+  color: white;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.badge-spoilers {
+  background-color: #fee2e2;
+  color: #991b1b;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  display: inline-block;
+  font-weight: 600;
+}
+
+.card-details-grid {
+  font-size: 0.85rem;
+  color: rgba(36, 31, 53, 0.75);
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  border-top: 1px solid var(--color-borde);
+  border-bottom: 1px solid var(--color-borde);
+  padding: 0.5rem 0;
+}
+
+.card-texts {
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.card-resena, .card-motivo {
+  margin: 0;
+  color: rgba(36, 31, 53, 0.9);
+}
+/* ---------- 11. Botones de Acción en las Tarjetas (Editar / Eliminar) ---------- */
+.card-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: auto; /* Empuja los botones siempre hacia el fondo de la tarjeta */
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-borde);
+}
+
+.btn-action {
+  flex: 1; /* Hace que ambos botones ocupen el mismo ancho */
+  padding: 0.5rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid var(--color-borde);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+/* Botón de Editar */
+.btn-edit {
+  background-color: transparent;
+  color: var(--color-principal);
+  border-color: var(--color-principal);
+}
+
+.btn-edit:hover {
+  background-color: var(--color-principal);
+  color: #FFFFFF;
+}
+
+/* Botón de Eliminar */
+.btn-delete {
+  background-color: transparent;
+  color: #c0392b; /* Rojo suave de alerta */
+  border-color: #e0b4b0;
+}
+
+.btn-delete:hover {
+  background-color: #c0392b;
+  color: #FFFFFF;
+  border-color: #c0392b;
+}
+
+.btn-action:active {
+  transform: scale(0.97);
+}
+/* ---------- 11. Estilos de Autenticación y Sesión ---------- */
+.auth-box {
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(36, 31, 53, 0.04);
+}
+
+.auth-box h3 {
+  margin-top: 0;
+  font-family: var(--fuente-titulos);
+  color: var(--color-principal);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.acciones-auth {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.user-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-superficie);
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radio);
+  border: 1px solid var(--color-borde);
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.boton-logout {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #f87171;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background-color 0.2s;
+}
+
+.boton-logout:hover {
+  background-color: #fecaca;
+}
+
+/* ---------- 12. Sección de Comentarios en las Tarjetas ---------- */
+.seccion-comentarios {
+  margin-top: 1rem;
+  border-top: 1px solid var(--color-borde);
+  padding-top: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.seccion-comentarios h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.95rem;
+  color: var(--color-principal);
+  font-family: var(--fuente-titulos);
+}
+
+.lista-comentarios {
+  max-height: 120px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 0.75rem;
+}
+
+.comentario-item {
+  background-color: var(--color-fondo);
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.sin-comentarios {
+  font-style: italic;
+  color: rgba(36, 31, 53, 0.5);
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.form-comentario {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.form-comentario input {
+  flex: 1;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.85rem;
+}
+
+.btn-comentar {
+  background-color: var(--color-secundario);
+  color: white;
+  border: none;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radio);
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.btn-comentar:hover {
+  opacity: 0.9;
+}
+
+.aviso-login-comentario {
+  font-size: 0.8rem;
+  color: rgba(36, 31, 53, 0.6);
+  margin: 0.2rem 0 0 0;
+}
+
+/* ---------- 13. Botones de Acción (Editar / Eliminar) ---------- */
+.card-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-borde);
+}
+
+.btn-action {
+  flex: 1;
+  padding: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid var(--color-borde);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.btn-edit {
+  background-color: transparent;
+  color: var(--color-principal);
+  border-color: var(--color-principal);
+}
+
+.btn-edit:hover {
+  background-color: var(--color-principal);
+  color: #FFFFFF;
+}
+
+.btn-delete {
+  background-color: transparent;
+  color: #c0392b;
+  border-color: #e0b4b0;
+}
+
+.btn-delete:hover {
+  background-color: #c0392b;
+  color: #FFFFFF;
+}
+/* ==========================================
+   ESTILOS MODERNOS Y ANIMADOS PARA EL LOGIN
+   ========================================== */
+
+/* Animación de entrada suave para el contenedor de login */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: translateY(15px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Caja de Autenticación con Gradiente y Efecto Moderno */
+.auth-box {
+  background: linear-gradient(135deg, #ffffff 0%, #f7f5ff 100%);
+  border: 1px solid rgba(198, 189, 230, 0.6);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 25px -5px rgba(75, 58, 168, 0.1), 
+              0 8px 10px -6px rgba(75, 58, 168, 0.1);
+  animation: fadeInScale 0.4s ease-out forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Detalle de línea decorativa con gradiente superior */
+.auth-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-principal), #ff02c8);
+}
+
+.auth-box h3 {
+  margin-top: 0;
+  font-family: var(--fuente-titulos);
+  color: var(--color-principal);
+  font-size: 1.4rem;
+  margin-bottom: 1.2rem;
+  font-weight: 700;
+}
+
+/* Campos de texto estilizados dentro del login */
+.auth-box .campo input {
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  background-color: #faf8ff;
+}
+
+.auth-box .campo input:focus {
+  border-color: #ff02c8;
+  box-shadow: 0 0 0 3px rgba(255, 2, 200, 0.15);
+  background-color: #ffffff;
+}
+
+/* Botones con gradientes atractivos y efectos hover interactivos */
+.acciones-auth {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.acciones-auth button {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: none;
+}
+
+/* Botón principal con gradiente vibrante (Violeta a Fucsia/Magenta) */
+#btn-login {
+  background: linear-gradient(135deg, var(--color-principal) 0%, #6e42c1 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(75, 58, 168, 0.3);
+}
+
+#btn-login:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(75, 58, 168, 0.4);
+}
+
+#btn-login:active {
+  transform: translateY(0);
+}
+
+/* Botón secundario de registro con borde dinámico */
+#btn-register {
+  background-color: transparent;
+  color: var(--color-principal);
+  border: 2px solid var(--color-principal);
+}
+
+#btn-register:hover {
+  background-color: var(--color-principal);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Barra de bienvenida del usuario logueado con animación */
+.user-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #4b3aa8 0%, #6e42c1 100%);
+  color: white;
+  padding: 1rem 1.25rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(75, 58, 168, 0.2);
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  animation: fadeInScale 0.3s ease-out forwards;
+}
+
+#user-info {
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* Botón de cerrar sesión moderno */
+.boton-logout {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.45rem 0.85rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s ease;
+}
+
+.boton-logout:hover {
+  background-color: #f163c2;
+  border-color: #ff03c8;
+  transform: scale(1.05);
+}
+:root {
+  --color-principal: #4B3AA8;   /* violeta: acciones y foco */
+  --color-secundario: #1FA091;  /* verde agua: detalles y acentos */
+  --color-fondo: #EFECF7;       /* lavanda muy claro: fondo de página */
+  --color-texto: #241F35;       /* tinta: todo el texto */
+  --fuente-principal: 'Karla', 'Segoe UI', system-ui, sans-serif;
+
+  /* Auxiliares derivadas de la paleta */
+  --fuente-titulos: 'Fraunces', Georgia, serif;
+  --color-superficie: #FFFFFF;
+  --color-borde: #CFC8E6;
+  --radio: 12px;
+  --espacio: 1.25rem;
+}
+
+/* ---------- 2. Reset mínimo ---------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: var(--fuente-principal);
+  font-size: 16px;
+  line-height: 1.6;
+  padding-bottom: 3rem;
+}
+
+/* ---------- 3. Estructura centrada tipo App ---------- */
+.pagina {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 600px; /* Ancho ideal tipo app móvil/feed centrado */
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+
+@media (min-width: 900px) {
+  .pagina {
+    max-width: 960px; /* Vista de escritorio amplia pero contenida y centrada */
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 2.5rem;
+    padding: 3rem 1.5rem;
+    align-items: start;
+  }
+}
+
+/* ---------- 4. Panel de presentación y Autenticación ---------- */
+.panel {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .panel {
+    position: sticky;
+    top: 2rem;
+  }
+}
+
+.marca {
+  margin: 0;
+  font-family: var(--fuente-titulos);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--color-principal);
+  text-align: center;
+}
+
+@media (min-width: 900px) {
+  .marca {
+    text-align: left;
+  }
+}
+
+.panel__titulo {
+  margin: 0;
+  font-family: var(--fuente-titulos);
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 500;
+  line-height: 1.15;
+  text-align: center;
+}
+
+@media (min-width: 900px) {
+  .panel__titulo {
+    text-align: left;
+  }
+}
+
+.panel__texto {
+  margin: 0;
+  color: #ff02c8;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+@media (min-width: 900px) {
+  .panel__texto {
+    text-align: left;
+  }
+}
+
+.tips {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-borde);
+  display: none; /* Ocultamos tips en móvil para ganar espacio, se ven en escritorio */
+}
+
+@media (min-width: 900px) {
+  .tips {
+    display: block;
+  }
+  .tips li {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--color-borde);
+    font-size: 0.88rem;
+    color: rgba(36, 31, 53, 0.75);
+  }
+}
+
+/* ---------- 5. Formulario Centrado ---------- */
+.contenido {
+  padding: 0;
+  width: 100%;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.bloque {
+  margin: 0;
+  padding: 1.5rem;
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  box-shadow: 0 4px 12px rgba(75, 58, 168, 0.04);
+}
+
+.bloque__titulo {
+  padding: 0 0.5rem;
+  margin-left: -0.5rem;
+  font-family: var(--fuente-titulos);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-principal);
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: var(--espacio);
+}
+
+.campo:last-child {
+  margin-bottom: 0;
+}
+
+.campo label,
+.campo__etiqueta {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--espacio);
+}
+
+@media (min-width: 480px) {
+  .fila {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ---------- 6. Controles ---------- */
+input[type="text"],
+input[type="url"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--color-texto);
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: 8px;
+  transition: all 0.25s ease;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+::placeholder {
+  color: rgba(36, 31, 53, 0.4);
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible {
+  outline: none;
+  border-color: #ff02c8;
+  box-shadow: 0 0 0 3px rgba(255, 2, 200, 0.15);
+}
+
+.ayuda {
+  font-size: 0.78rem;
+  color: rgba(36, 31, 53, 0.6);
+}
+
+/* ---------- 7. Checkboxes y radios ---------- */
+.opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.2rem;
+}
+
+.opciones--fila {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.opcion {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.opcion--suelta {
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-borde);
+}
+
+.opcion input {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--color-secundario);
+  cursor: pointer;
+}
+
+/* ---------- 8. Botones ---------- */
+.acciones {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+@media (min-width: 480px) {
+  .acciones {
+    flex-direction: row;
+  }
+}
+
+.boton {
+  padding: 0.85rem 1.25rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  flex: 1;
+}
+
+.boton--principal {
+  background: linear-gradient(135deg, var(--color-principal) 0%, #6e42c1 100%);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(75, 58, 168, 0.25);
+}
+
+.boton--principal:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(75, 58, 168, 0.35);
+}
+
+.boton--secundario {
+  background-color: transparent;
+  color: var(--color-principal);
+  border-color: var(--color-borde);
+}
+
+.boton--secundario:hover {
+  border-color: var(--color-principal);
+  background-color: rgba(75, 58, 168, 0.04);
+}
+
+/* ---------- 9. Accesibilidad ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
+
+/* ---------- 10. Sección de Catálogo y Carteleras (Feed Centrado) ---------- */
+.catalog-section {
+  max-width: 600px;
+  margin: 3rem auto 2rem auto;
+  padding: 0 1rem;
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+.catalog-section h2 {
+  font-family: var(--fuente-titulos);
+  font-size: 1.7rem;
+  color: var(--color-principal);
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+/* Grilla en formato Feed vertical ideal para App móvil */
+.grid-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+/* Estilo individual de cada tarjeta tipo App Feed */
+.card-serie {
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 6px 18px rgba(36, 31, 53, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card-serie:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(75, 58, 168, 0.12);
+}
+
+.card-serie img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  background-color: var(--color-borde);
+}
+
+.card-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  flex-grow: 1;
+}
+
+.card-header-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.badge-tipo {
+  background-color: var(--color-principal);
+  color: white;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.badge-genero {
+  background-color: var(--color-fondo);
+  color: var(--color-principal);
+  padding: 0.2rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.badge-spoilers {
+  background-color: #fee2e2;
+  color: #991b1b;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  display: inline-block;
+  font-weight: 600;
+}
+
+.score {
+  font-weight: 700;
+  color: #f39c12;
+  font-size: 1rem;
+}
+
+.card-title {
+  font-family: var(--fuente-titulos);
+  font-size: 1.35rem;
+  margin: 0;
+  color: var(--color-texto);
+  line-height: 1.3;
+}
+
+.card-details-grid {
+  font-size: 0.85rem;
+  color: rgba(36, 31, 53, 0.75);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  border-top: 1px solid var(--color-borde);
+  border-bottom: 1px solid var(--color-borde);
+  padding: 0.6rem 0;
+}
+
+.card-texts {
+  font-size: 0.92rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.card-resena, .card-motivo {
+  margin: 0;
+  color: rgba(36, 31, 53, 0.9);
+}
+
+.card-footer-author {
+  font-size: 0.8rem;
+  color: rgba(36, 31, 53, 0.6);
+  border-top: 1px solid var(--color-borde);
+  padding-top: 0.75rem;
+  margin-top: auto;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 1.05rem;
+  color: rgba(36, 31, 53, 0.7);
+  grid-column: 1 / -1;
+  padding: 2rem 0;
+}
+
+/* ---------- 11. Botones de Acción (Editar / Eliminar) ---------- */
+.card-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-borde);
+}
+
+.btn-action {
+  flex: 1;
+  padding: 0.55rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid var(--color-borde);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  transition: all 0.2s ease;
+}
+
+.btn-edit {
+  background-color: transparent;
+  color: var(--color-principal);
+  border-color: var(--color-principal);
+}
+
+.btn-edit:hover {
+  background-color: var(--color-principal);
+  color: #FFFFFF;
+}
+
+.btn-delete {
+  background-color: transparent;
+  color: #c0392b;
+  border-color: #e0b4b0;
+}
+
+.btn-delete:hover {
+  background-color: #c0392b;
+  color: #FFFFFF;
+}
+
+.btn-action:active {
+  transform: scale(0.97);
+}
+
+/* ---------- 12. Autenticación y Comentarios Estilizados App-like ---------- @keyframes */
+@keyframes fadeInScale {
+  0% { opacity: 0; transform: translateY(10px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.auth-box {
+  background: linear-gradient(135deg, #ffffff 0%, #f7f5ff 100%);
+  border: 1px solid rgba(198, 189, 230, 0.6);
+  border-radius: var(--radio);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 8px 20px -4px rgba(75, 58, 168, 0.08);
+  animation: fadeInScale 0.4s ease-out forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-principal), #ff02c8);
+}
+
+.auth-box h3 {
+  margin-top: 0;
+  font-family: var(--fuente-titulos);
+  color: var(--color-principal);
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.acciones-auth {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.user-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #4b3aa8 0%, #6e42c1 100%);
+  color: white;
+  padding: 0.85rem 1.15rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(75, 58, 168, 0.2);
+  margin-bottom: 1.25rem;
+  font-size: 0.9rem;
+  animation: fadeInScale 0.3s ease-out forwards;
+}
+
+#user-info {
+  font-weight: 600;
+}
+
+.boton-logout {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.78rem;
+  transition: all 0.2s ease;
+}
+
+.boton-logout:hover {
+  background-color: #ff4757;
+  border-color: #ff4757;
+}
+
+/* Comentarios */
+.seccion-comentarios {
+  margin-top: 1rem;
+  border-top: 1px solid var(--color-borde);
+  padding-top: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.seccion-comentarios h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.9rem;
+  color: var(--color-principal);
+  font-family: var(--fuente-titulos);
+}
+
+.lista-comentarios {
+  max-height: 110px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 0.75rem;
+}
+
+.comentario-item {
+  background-color: var(--color-fondo);
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.83rem;
+}
+
+.sin-comentarios {
+  font-style: italic;
+  color: rgba(36, 31, 53, 0.5);
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.form-comentario {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.form-comentario input {
+  flex: 1;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.85rem;
+}
+
+.btn-comentar {
+  background-color: var(--color-secundario);
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: opacity 0.2s;
+}
+
+.btn-comentar:hover {
+  opacity: 0.9;
+}
+
+.aviso-login-comentario {
+  font-size: 0.78rem;
+  color: rgba(36, 31, 53, 0.6);
+  margin: 0.2rem 0 0 0;
+}
+/* ---------- Tarjetas más compactas ---------- */
+.card-serie img {
+  width: 100%;
+  height: 220px; /* Reducido de 380px a 220px para que no sean tan altas */
+  object-fit: cover;
+  background-color: var(--color-borde);
+}
+
+.card-body {
+  padding: 0.85rem 1rem; /* Menos espacio interno */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* Menos separación entre elementos */
+  flex-grow: 1;
+}
+
+.card-title {
+  font-family: var(--fuente-titulos);
+  font-size: 1.15rem; /* Título un poco más chico y compacto */
+  margin: 0;
+  color: var(--color-texto);
+  line-height: 1.2;
+}
+
+.card-details-grid {
+  font-size: 0.8rem;
+  color: rgba(36, 31, 53, 0.75);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  border-top: 1px solid var(--color-borde);
+  border-bottom: 1px solid var(--color-borde);
+  padding: 0.4rem 0;
+}
+
+.card-texts {
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-borde);
+}
+
+.btn-action {
+  padding: 0.35rem;
+  font-size: 0.78rem;
+}
+/* ==========================================
+   TARJETAS COMPACTAS, MODERNAS Y LLAMATIVAS
+   ========================================== */
+
+.grid-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .grid-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+.card-serie {
+  background: linear-gradient(145deg, #ffffff 0%, #f9f8ff 100%);
+  border: 1px solid rgba(198, 189, 230, 0.8);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 20px -6px rgba(75, 58, 168, 0.12);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.card-serie:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px -4px rgba(255, 2, 200, 0.2);
+  border-color: #ff02c8;
+}
+
+/* Imagen compacta y elegante con efecto zoom sutil */
+.card-serie img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background-color: var(--color-borde);
+  transition: transform 0.4s ease;
+}
+
+.card-serie:hover img {
+  transform: scale(1.03);
+}
+
+.card-body {
+  padding: 1rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  flex-grow: 1;
+}
+
+/* Cabecera atractiva con badges llamativos */
+.card-header-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.badge-tipo {
+  background: linear-gradient(135deg, var(--color-principal) 0%, #6e42c1 100%);
+  color: white;
+  padding: 0.18rem 0.55rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-genero {
+  background-color: #f1edfc;
+  color: var(--color-principal);
+  padding: 0.18rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+/* Estrellas y puntuación destacada */
+.score {
+  font-weight: 800;
+  color: #f59e0b;
+  font-size: 0.95rem;
+  background: #fef3c7;
+  padding: 0.1rem 0.45rem;
+  border-radius: 6px;
+}
+
+.card-title {
+  font-family: var(--fuente-titulos);
+  font-size: 1.15rem;
+  margin: 0;
+  color: var(--color-texto);
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+/* Detalles clave en formato compacto */
+.card-details-grid {
+  font-size: 0.78rem;
+  color: rgba(36, 31, 53, 0.75);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  border-top: 1px dashed var(--color-borde);
+  border-bottom: 1px dashed var(--color-borde);
+  padding: 0.5rem 0;
+}
+
+.badge-spoilers {
+  background-color: #fee2e2;
+  color: #991b1b;
+  font-size: 0.7rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 6px;
+  display: inline-block;
+  font-weight: 700;
+  margin-top: 0.2rem;
+}
+
+.card-texts {
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.card-resena, .card-motivo {
+  margin: 0;
+  color: rgba(36, 31, 53, 0.85);
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limita a 2 líneas para que sea compacto */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-footer-author {
+  font-size: 0.75rem;
+  color: rgba(36, 31, 53, 0.55);
+  border-top: 1px solid var(--color-borde);
+  padding-top: 0.6rem;
+  margin-top: auto;
+}
+
+/* Botones de acción ultra estilizados */
+.card-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--color-borde);
+}
+
+.btn-action {
+  flex: 1;
+  padding: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid var(--color-borde);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  transition: all 0.2s ease;
+}
+
+.btn-edit {
+  background-color: #f7f5ff;
+  color: var(--color-principal);
+  border-color: #dcd6f7;
+}
+
+.btn-edit:hover {
+  background-color: var(--color-principal);
+  color: #FFFFFF;
+}
+
+.btn-delete {
+  background-color: #fff5f5;
+  color: #e53e3e;
+  border-color: #fed7d7;
+}
+
+.btn-delete:hover {
+  background-color: #e53e3e;
+  color: #FFFFFF;
+}
+/* ==========================================
+   CAJA DE LOGIN COMPACTA Y CENTRADA
+   ========================================== */
+
+.auth-box {
+  background: linear-gradient(135deg, #ffffff 0%, #f7f5ff 100%);
+  border: 1px solid rgba(198, 189, 230, 0.7);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem; /* Espaciado interno más compacto */
+  margin: 0 auto 1.5rem auto; /* Centrado automático */
+  max-width: 420px; /* Ancho máximo reducido para que no ocupe toda la pantalla */
+  width: 100%;
+  box-shadow: 0 8px 20px -5px rgba(75, 58, 168, 0.1);
+  animation: fadeInScale 0.4s ease-out forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-principal), #ff02c8);
+}
+
+.auth-box h3 {
+  margin-top: 0;
+  font-family: var(--fuente-titulos);
+  color: var(--color-principal);
+  font-size: 1.15rem; /* Título más chico y estilizado */
+  margin-bottom: 0.85rem;
+  font-weight: 700;
+  text-align: center; /* Título centrado */
+}
+
+/* Campos de texto más compactos dentro del login */
+.auth-box .campo {
+  margin-bottom: 0.75rem; /* Menos separación entre los inputs */
+}
+
+.auth-box .campo input {
+  padding: 0.55rem 0.75rem;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  background-color: #faf8ff;
+  transition: all 0.3s ease;
+}
+
+.auth-box .campo input:focus {
+  border-color: #ff02c8;
+  box-shadow: 0 0 0 3px rgba(255, 2, 200, 0.12);
+  background-color: #ffffff;
+}
+
+/* Botones de autenticación compactos */
+.acciones-auth {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.acciones-auth button {
+  flex: 1;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+/* Botón de Iniciar Sesión */
+#btn-login {
+  background: linear-gradient(135deg, var(--color-principal) 0%, #6e42c1 100%);
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(75, 58, 168, 0.25);
+}
+
+#btn-login:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(75, 58, 168, 0.35);
+}
+
+/* Botón de Registrarse */
+#btn-register {
+  background-color: transparent;
+  color: var(--color-principal);
+  border: 1.5px solid var(--color-principal);
+}
+
+#btn-register:hover {
+  background-color: var(--color-principal);
+  color: #ffffff;
+}
+
+/* Barra de usuario logueado también centrada y compacta */
+.user-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #4b3aa8 0%, #6e42c1 100%);
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(75, 58, 168, 0.15);
+  margin: 0 auto 1.25rem auto;
+  max-width: 420px;
+  width: 100%;
+  font-size: 0.9rem;
+  animation: fadeInScale 0.3s ease-out forwards;
+}
